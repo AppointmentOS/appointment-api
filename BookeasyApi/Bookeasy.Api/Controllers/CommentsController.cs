@@ -84,30 +84,6 @@ namespace Bookeasy.Api.Controllers
         }
 
         /// <summary>
-        /// Vote comment
-        /// </summary>
-        /// <param name="postId"></param>
-        /// <param name="commentId"></param>
-        /// <param name="body"></param>
-        /// <returns></returns>
-        [Route("{commentId}/vote")]
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> VoteComment([FromRoute] string postId, [FromRoute] string commentId,
-            CreateVoteCommentDto body)
-        {
-            await _mediator.Send(new CreateVoteCommentCommand
-            {
-                PostId = postId,
-                CommentId = commentId,
-                UserId = User.GetUserId(),
-                VoteType = Enum.Parse<VoteType>(body.VoteType, true)
-            });
-
-            return Ok();
-        }
-
-        /// <summary>
         /// Delete vote
         /// </summary>
         /// <param name="postId"></param>
