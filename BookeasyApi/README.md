@@ -2,4 +2,4 @@
 
 `dotnet build`
 
-`dotnet run --project Iris.Api`
+`dotnet run --project Bookeasy.Api`
