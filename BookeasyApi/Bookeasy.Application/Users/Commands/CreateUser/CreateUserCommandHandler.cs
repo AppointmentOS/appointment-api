@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Bookeasy.Application.Users.Commands.CreateUser
 {
-    public class CreateUserHandler : IExtendedRequestHandler<CreateUserCommand, UserDto>
+    public class CreateUserCommandHandler : IExtendedRequestHandler<CreateUserCommand, UserDto>
     {
         private readonly IUserManager _userManager;
         private readonly IMapper _mapper;
 
-        public CreateUserHandler(IUserManager userManager, IMapper mapper)
+        public CreateUserCommandHandler(IUserManager userManager, IMapper mapper)
         {
             _userManager = userManager;
             _mapper = mapper;

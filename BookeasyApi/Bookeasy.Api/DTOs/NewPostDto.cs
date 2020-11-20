@@ -17,7 +17,6 @@ namespace Bookeasy.Api.DTOs
         {
             RuleFor(x => x.Title).MinimumLength(10).MaximumLength(100);
             RuleFor(x => x.Body).MinimumLength(10).MaximumLength(5000);
-            RuleFor(x => x.PostType).Must(s => Enum.TryParse(s, true, out PostType _));
         }
     }
 }

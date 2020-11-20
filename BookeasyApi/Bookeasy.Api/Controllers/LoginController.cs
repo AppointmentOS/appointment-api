@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace Bookeasy.Api.Controllers
 {
+    using MediatR;
+
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : BaseController
@@ -17,7 +19,7 @@ namespace Bookeasy.Api.Controllers
         private IConfiguration _config;
         private readonly IMapper _mapper;
 
-        public LoginController(IConfiguration config, IMapper mapper)
+        public LoginController(IMediator mediator, IConfiguration config, IMapper mapper) : base(mediator)
         {
             _config = config;
             _mapper = mapper;

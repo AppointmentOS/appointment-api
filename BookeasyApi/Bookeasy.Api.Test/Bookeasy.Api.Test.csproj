@@ -15,12 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
-      <Folder Include="Validators" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Iris.Api\Iris.Api.csproj" />
+      <ProjectReference Include="..\Bookeasy.Api\Bookeasy.Api.csproj" />
     </ItemGroup>
 
 </Project>

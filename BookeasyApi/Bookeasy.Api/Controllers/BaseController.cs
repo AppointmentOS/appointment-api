@@ -10,6 +10,11 @@ namespace Bookeasy.Api.Controllers
     {
         private IMediator _mediator;
 
-        protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+        protected IMediator Mediator => _mediator;
+
+        protected BaseController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
     }
 }
