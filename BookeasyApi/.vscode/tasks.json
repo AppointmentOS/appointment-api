@@ -7,20 +7,9 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Iris.Api/Iris.Api.csproj",
+                "${workspaceFolder}/Bookeasy.Api/Bookeasy.Api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "run",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "run",
-                "--project",
-                "${workspaceFolder}/Iris.Api/Iris.Api.csproj"
             ],
             "problemMatcher": "$msCompile"
         },
@@ -30,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Iris.Api/Iris.Api.csproj",
+                "${workspaceFolder}/Bookeasy.Api/Bookeasy.Api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -43,7 +32,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/Iris.Api/Iris.Api.csproj",
+                "${workspaceFolder}/Bookeasy.Api/Bookeasy.Api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
