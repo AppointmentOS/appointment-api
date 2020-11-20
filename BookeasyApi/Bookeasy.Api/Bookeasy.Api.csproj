@@ -27,4 +27,7 @@
     <ProjectReference Include="..\Bookeasy.Infrastructure\Bookeasy.Infrastructure.csproj" />
     <ProjectReference Include="..\Bookeasy.Persistence\Bookeasy.Persistence.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTOs" />
+  </ItemGroup>
 </Project>

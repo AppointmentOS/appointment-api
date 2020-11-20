@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Bookeasy.Api.DTOs;
 using Bookeasy.Application.Users.Queries.GetAuthenticationToken;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

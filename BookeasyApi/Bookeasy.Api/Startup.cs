@@ -36,7 +36,7 @@ namespace Bookeasy.Api
             services.AddApplication();
             services.AddControllers()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IIrisDbContext>())
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 
             // allow all origins
             services.AddCors(o => o.AddDefaultPolicy(builder =>

@@ -1,4 +1,5 @@
 ﻿using Bookeasy.Api.Controllers;
+using Bookeasy.Api.RequestSchemas;
 using MediatR;
 using Moq;
 using NUnit.Framework;
@@ -8,7 +9,6 @@ namespace Bookeasy.Api.Test.Controllers
     using Application.Common.Models;
     using Application.Users.Commands.CreateUser;
     using Application.Users.Queries.GetUserDetail;
-    using DTOs;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading;
     using System.Threading.Tasks;
