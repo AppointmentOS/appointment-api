@@ -1,4 +1,5 @@
-﻿using Bookeasy.Application.Users.Commands.CreateUser;
+﻿using Bookeasy.Api.RequestSchemas;
+using Bookeasy.Application.Users.Commands.CreateUser;
 using Bookeasy.Application.Users.Queries.GetUserDetail;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -6,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using Bookeasy.Api.RequestSchemas;
 
 namespace Bookeasy.Api.Controllers
 {
