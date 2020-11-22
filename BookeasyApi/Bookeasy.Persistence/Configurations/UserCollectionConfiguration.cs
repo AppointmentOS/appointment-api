@@ -5,12 +5,12 @@ namespace Bookeasy.Persistence.Configurations
 {
     public static class UserCollectionConfiguration
     {
-        public static void ConfigureUniqueIndex(IMongoCollection<User> collection)
+        public static void ConfigureUniqueIndex(IMongoCollection<BusinessUser> collection)
         {
-            var keys = Builders<User>.IndexKeys
+            var keys = Builders<BusinessUser>.IndexKeys
                 .Ascending(user => user.Email);
 
-            var indexModel = new CreateIndexModel<User>(keys, new CreateIndexOptions { Unique = true });
+            var indexModel = new CreateIndexModel<BusinessUser>(keys, new CreateIndexOptions { Unique = true });
             collection.Indexes.CreateOne(indexModel);
         }
     }

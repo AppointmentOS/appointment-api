@@ -28,6 +28,6 @@
     <ProjectReference Include="..\Bookeasy.Persistence\Bookeasy.Persistence.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DTOs" />
+    <Folder Include="Services" />
   </ItemGroup>
 </Project>

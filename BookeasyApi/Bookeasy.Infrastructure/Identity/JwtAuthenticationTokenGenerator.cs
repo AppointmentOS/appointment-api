@@ -2,17 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Bookeasy.Domain.Entities;
+using MongoDB.Bson;
 
 namespace Bookeasy.Infrastructure.Identity
 {
     public interface IAuthenticationTokenGenerator
     {
         string GenerateToken(List<Claim> claimsInfo);
-        RefreshToken GenerateRefreshToken(string ipAddress);
+        RefreshToken GenerateRefreshToken(string userId, string ipAddress);
     }
 
     public class JwtAuthenticationTokenGenerator : IAuthenticationTokenGenerator
@@ -40,20 +41,19 @@ namespace Bookeasy.Infrastructure.Identity
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public RefreshToken GenerateRefreshToken(string ipAddress)
+        public RefreshToken GenerateRefreshToken(string userId, string ipAddress)
         {
-            using (var rngCryptoServiceProvider = new RNGCryptoServiceProvider())
+            using var rngCryptoServiceProvider = new RNGCryptoServiceProvider();
+            var randomBytes = new byte[64];
+            rngCryptoServiceProvider.GetBytes(randomBytes);
+            return new RefreshToken
             {
-                var randomBytes = new byte[64];
-                rngCryptoServiceProvider.GetBytes(randomBytes);
-                return new RefreshToken
-                {
-                    Token = Convert.ToBase64String(randomBytes),
-                    Expires = DateTime.UtcNow.AddDays(7),
-                    Created = DateTime.UtcNow,
-                    CreatedByIp = ipAddress
-                };
-            }
+                Id = ObjectId.GenerateNewId(),
+                UserId = userId,
+                Token = Convert.ToBase64String(randomBytes),
+                Expires = DateTime.UtcNow.AddDays(7),
+                CreatedByIp = ipAddress
+            };
         }
     }
 }

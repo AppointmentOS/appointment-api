@@ -6,9 +6,9 @@ namespace Bookeasy.Application.Common.Interfaces
 {
     public interface IUserManager
     {
-        Task<(Result Result, User user)> CreateUserAsync(User user, string password);
+        Task<BusinessUser> CreateUserAsync(BusinessUser businessUser, string password);
 
-        Task<Result> DeleteUserAsync(string userId);
+        Task DeleteUserAsync(string userId);
 
         /// <summary>
         /// 
@@ -17,5 +17,6 @@ namespace Bookeasy.Application.Common.Interfaces
         /// <returns>Token and refresh token</returns>
         /// <exception cref="AuthenticationException">Email or password mismatch</exception>
         Task<AuthenticationResponse> AuthenticateAsync(AuthenticationRequest request);
+        Task<RefreshTokenResponse> RefreshToken(string userId, string token, string ipAddress);
     }
 }

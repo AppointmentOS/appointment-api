@@ -22,7 +22,7 @@ namespace Bookeasy.Application.Users.Queries.GetUserDetail
         {
             try
             {
-                var user = await _context.User.GetAsync(request.UserId);
+                var user = await _context.BusinessUser.FindByIdAsync(request.UserId);
                 return CQRSResult<UserDto>.CreateSuccessResult(_mapper.Map<UserDto>(user));
             }
             catch (Exception e)

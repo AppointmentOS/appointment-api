@@ -4,7 +4,7 @@ using Bookeasy.Domain.Entities;
 
 namespace Bookeasy.Application.Users.Queries.GetUserDetail
 {
-    public class UserDto : IMapFrom<User>
+    public class UserDto : IMapFrom<BusinessUser>
     {
         public string Id { get; set; }
         public string Email { get; set; }
@@ -13,9 +13,9 @@ namespace Bookeasy.Application.Users.Queries.GetUserDetail
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<User, UserDto>()
+            profile.CreateMap<BusinessUser, UserDto>()
                 .ForMember(dest => dest.Id, options => options.MapFrom(src => src.Id.ToString()));
-            profile.CreateMap<UserDto, User>();
+            profile.CreateMap<UserDto, BusinessUser>();
         }
     }
 }

@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using MongoDB.Driver;
 
 namespace Bookeasy.Persistence
 {
@@ -16,7 +15,7 @@ namespace Bookeasy.Persistence
                 provider.GetRequiredService<IOptions<MongoDbDatabaseSettings>>().Value);
 
             services.AddScoped<IIrisDbContext, IrisDbContext>();
-
+            
             return services;
         }
     }

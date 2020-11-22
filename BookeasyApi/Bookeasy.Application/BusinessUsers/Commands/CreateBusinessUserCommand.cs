@@ -1,0 +1,39 @@
+using Bookeasy.Application.Common.Interfaces;
+using Bookeasy.Domain.Entities;
+using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Bookeasy.Application.BusinessUsers.Commands
+{
+    /// <summary>
+    /// Create a new business user
+    /// </summary>
+    public class CreateBusinessUserCommand : IRequest<BusinessUser>
+    {
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string BusinessName { get; set; }
+    }
+
+    public class CreateBusinessUserCommandHandler : IRequestHandler<CreateBusinessUserCommand, BusinessUser>
+    {
+        private readonly IUserManager _userManager;
+
+        public CreateBusinessUserCommandHandler(IUserManager userManager)
+        {
+            _userManager = userManager;
+        }
+
+        public async Task<BusinessUser> Handle(CreateBusinessUserCommand request, CancellationToken cancellationToken)
+        {
+            return await _userManager.CreateUserAsync(new BusinessUser
+            {
+                Email = request.Email,
+                BusinessName = request.BusinessName,
+            }, request.Password);
+        }
+    }
+}

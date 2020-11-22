@@ -2,6 +2,6 @@
 {
     public interface IIrisDbContext
     {
-        IUserCollection User { get; }
+        IBusinessUserRepository BusinessUser { get; }
     }
 }

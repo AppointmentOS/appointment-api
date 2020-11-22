@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Threading.Tasks;
+using Bookeasy.Application.Users.Commands;
 
 namespace Bookeasy.Api.Controllers
 {
@@ -42,6 +42,14 @@ namespace Bookeasy.Api.Controllers
                 return Ok(result.Payload);
 
             return BadRequest(new ProblemDetails() { Title = result.Error.Message });
+        }
+
+        public async Task<ActionResult> RefreshToken()
+        {
+            var token = Request.Cookies["refreshToken"];
+            var refreshToken = await Mediator.Send(new RefreshTokenCommand());
+
+            return null;
         }
     }
 }

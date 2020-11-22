@@ -14,27 +14,22 @@ namespace Bookeasy.Infrastructure.Test
         [Test]
         public async Task CreateUserTest()
         {
-            var user = new User() { Email = "sample@email.com" };
+            var user = new BusinessUser()
+            {
+                Email = "sample@email.com"
+            };
             var password = "password";
 
-            var userMock = new Mock<IUserCollection>();
-            userMock.Setup(u => u.CreateAsync(It.IsAny<User>()))
-                .ReturnsAsync(() => new User()
-                {
-                    Id = ObjectId.GenerateNewId(),
-                    Email = user.Email,
-                    PasswordHash = "hash"
-                });
-            var contextMock = new Mock<IIrisDbContext>();
-            contextMock.SetupGet(ctx => ctx.User).Returns(userMock.Object);
+            var userMock = new Mock<IBusinessUserRepository>();
+            userMock.Setup(u => u.InsertOneAsync(It.IsAny<BusinessUser>()));
+            var refreshTokenRepoMock = new Mock<IMongoRepository<RefreshToken>>();
 
             var tokenGeneratorMock = new Mock<IAuthenticationTokenGenerator>();
 
-            var manager = new UserManagerService(contextMock.Object, tokenGeneratorMock.Object);
+            var manager =
+                new UserManagerService(userMock.Object, refreshTokenRepoMock.Object, tokenGeneratorMock.Object);
             var result = await manager.CreateUserAsync(user, password);
             Assert.NotNull(result);
-            Assert.IsTrue(result.Result.Succeeded);
-            Assert.IsNotNull(result.user.Id);
         }
     }
 }
