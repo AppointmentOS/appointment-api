@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="FirebaseAdmin" Version="2.0.0" />
     <PackageReference Include="FluentValidation" Version="9.1.2" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="9.1.2" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.1.2" />
@@ -24,7 +25,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bookeasy.Application\Bookeasy.Application.csproj" />
-    <ProjectReference Include="..\Bookeasy.Infrastructure\Bookeasy.Infrastructure.csproj" />
     <ProjectReference Include="..\Bookeasy.Persistence\Bookeasy.Persistence.csproj" />
   </ItemGroup>
   <ItemGroup>

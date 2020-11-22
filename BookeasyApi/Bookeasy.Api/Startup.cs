@@ -1,7 +1,6 @@
 using AutoMapper;
 using Bookeasy.Application;
 using Bookeasy.Application.Common.Interfaces;
-using Bookeasy.Infrastructure;
 using Bookeasy.Persistence;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -14,24 +13,28 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Bookeasy.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IConfiguration Configuration { get; }
+        public IWebHostEnvironment HostingEnvironment { get; }
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            HostingEnvironment = environment;
         }
-
-        public IConfiguration Configuration { get; }
-        public IWebHostEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyOrigin()));
-            services.AddInfrastructure(Configuration, Environment);
             services.AddPersistence(Configuration);
             services.AddApplication();
             services.AddControllers()
@@ -47,6 +50,35 @@ namespace Bookeasy.Api
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             }));
+
+            #region Firebase authentication
+
+            var pathToKey = Path.Combine(Directory.GetCurrentDirectory(), "keys", Configuration["FirebaseAuthentication:AdminSdkPath"]);
+
+            // initialize firebase admin sdk
+            FirebaseApp.Create(new AppOptions
+            {
+                Credential = GoogleCredential.FromFile(pathToKey)
+            });
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    var firebaseProjectName = Configuration["FirebaseAuthentication:ProjectName"];
+                    options.Authority = "https://securetoken.google.com/" + firebaseProjectName;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = "https://securetoken.google.com/" + firebaseProjectName,
+                        ValidateAudience = true,
+                        ValidAudience = firebaseProjectName,
+                        ValidateLifetime = true
+                    };
+                });
+
+            #endregion
+
+            #region Swagger
 
             services.AddSwaggerGen(c =>
             {
@@ -70,7 +102,11 @@ namespace Bookeasy.Api
                     {
                         new OpenApiSecurityScheme
                         {
-                            Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id = "Bearer"},
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
                             Scheme = "oauth2",
                             Name = "Bearer",
                             In = ParameterLocation.Header,
@@ -79,6 +115,8 @@ namespace Bookeasy.Api
                     }
                 });
             });
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
