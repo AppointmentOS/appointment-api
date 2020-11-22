@@ -1,3 +1,4 @@
+using System;
 using Bookeasy.Application.Common.Interfaces;
 using Bookeasy.Domain.Entities;
 using MediatR;
@@ -20,20 +21,14 @@ namespace Bookeasy.Application.BusinessUsers.Commands
 
     public class CreateBusinessUserCommandHandler : IRequestHandler<CreateBusinessUserCommand, BusinessUser>
     {
-        private readonly IUserManager _userManager;
 
-        public CreateBusinessUserCommandHandler(IUserManager userManager)
+        public CreateBusinessUserCommandHandler()
         {
-            _userManager = userManager;
         }
 
         public async Task<BusinessUser> Handle(CreateBusinessUserCommand request, CancellationToken cancellationToken)
         {
-            return await _userManager.CreateUserAsync(new BusinessUser
-            {
-                Email = request.Email,
-                BusinessName = request.BusinessName,
-            }, request.Password);
+            throw new NotImplementedException();
         }
     }
 }

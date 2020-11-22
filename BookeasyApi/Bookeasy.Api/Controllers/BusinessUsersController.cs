@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using FirebaseAdmin;
 
 namespace Bookeasy.Api.Controllers
 {
@@ -72,6 +74,39 @@ namespace Bookeasy.Api.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [AllowAnonymous]
+        [Route("verify")]
+        [HttpPost]
+        public async Task<ActionResult> VerifyToken([FromBody] TokenVerifyRequest request)
+        {
+            var auth = FirebaseAdmin.Auth.FirebaseAuth.DefaultInstance;
+
+            try
+            {
+                var res = await auth.VerifyIdTokenAsync(request.Token);
+                if (res != null)
+                    return Accepted();
+            }
+            catch (FirebaseException e)
+            {
+                return BadRequest();
+            }
+            return BadRequest();
+        }
+        
+        [HttpGet("secrets")]
+        [Authorize]
+        public IEnumerable<string> GetSecrets()
+        {
+            return new List<string>()
+            {
+                "This is from the secret controller",
+                "Seeing this means you are authenticated",
+                "You have logged in using your google account from firebase",
+                "Have a nice day!!"
+            };
         }
     }
 }

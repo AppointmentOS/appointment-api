@@ -53,7 +53,7 @@ namespace Bookeasy.Api
 
             #region Firebase authentication
 
-            var pathToKey = Path.Combine(Directory.GetCurrentDirectory(), "keys", Configuration["FirebaseAuthentication:AdminSdkPath"]);
+            var pathToKey = Configuration["FirebaseAuthentication:AdminSdkPath"];
 
             // initialize firebase admin sdk
             FirebaseApp.Create(new AppOptions
