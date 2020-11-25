@@ -1,7 +1,7 @@
-using System;
 using Bookeasy.Application.Common.Interfaces;
 using Bookeasy.Domain.Entities;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 

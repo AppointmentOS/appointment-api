@@ -1,8 +1,8 @@
-﻿using MongoDB.Bson;
+﻿using Bookeasy.Domain.Interfaces;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
-using Bookeasy.Domain.Interfaces;
 
 namespace Bookeasy.Domain.Entities
 {

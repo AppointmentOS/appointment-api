@@ -15,7 +15,7 @@ namespace Bookeasy.Persistence
                 provider.GetRequiredService<IOptions<MongoDbDatabaseSettings>>().Value);
 
             services.AddScoped<IIrisDbContext, IrisDbContext>();
-            
+
             return services;
         }
     }

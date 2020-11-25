@@ -1,9 +1,9 @@
+using Bookeasy.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Bookeasy.Domain.Entities;
 
 namespace Bookeasy.Application.Common.Interfaces
 {

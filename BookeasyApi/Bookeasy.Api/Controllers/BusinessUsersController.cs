@@ -1,8 +1,10 @@
-﻿using Bookeasy.Api.DTOs;
+﻿using AutoMapper;
+using Bookeasy.Api.DTOs;
 using Bookeasy.Api.RequestSchemas;
 using Bookeasy.Application.BusinessUsers.Commands;
 using Bookeasy.Application.BusinessUsers.Queries;
 using Bookeasy.Application.Common.Exceptions;
+using FirebaseAdmin;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -10,8 +12,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
-using FirebaseAdmin;
 
 namespace Bookeasy.Api.Controllers
 {
@@ -95,7 +95,7 @@ namespace Bookeasy.Api.Controllers
             }
             return BadRequest();
         }
-        
+
         [HttpGet("secrets")]
         [Authorize]
         public IEnumerable<string> GetSecrets()

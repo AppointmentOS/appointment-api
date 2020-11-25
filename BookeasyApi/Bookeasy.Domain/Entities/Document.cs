@@ -1,5 +1,5 @@
-using System;
 using MongoDB.Bson;
+using System;
 
 namespace Bookeasy.Domain.Entities
 {

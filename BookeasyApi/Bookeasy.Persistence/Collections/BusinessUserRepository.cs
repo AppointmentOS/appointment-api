@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Bookeasy.Application.Common.Interfaces;
+using Bookeasy.Data.Services;
+using Bookeasy.Domain.Entities;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Bookeasy.Application.Common.Interfaces;
-using Bookeasy.Data.Services;
-using Bookeasy.Domain.Entities;
-using MongoDB.Driver;
 using System.Threading.Tasks;
-using MongoDB.Bson;
 
 namespace Bookeasy.Persistence.Collections
 {

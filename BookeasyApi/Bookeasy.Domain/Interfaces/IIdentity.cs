@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Bookeasy.Domain.Entities;
+using System.Collections.Generic;
 
 namespace Bookeasy.Domain.Interfaces
 {
